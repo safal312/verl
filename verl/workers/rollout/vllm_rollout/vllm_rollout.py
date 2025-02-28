@@ -94,18 +94,22 @@ class vLLMRollout(BaseRollout):
                         else config.prompt_length + config.response_length
         max_model_len = int(max_model_len)
 
-        print(f"config.prompt_length: {config.prompt_length}")
-        print(f"config.response_length: {config.response_length}")
-        print(f"max_model_len: {max_model_len}")
-        print(f"max_num_batched_tokens:{max_num_batched_tokens}")
+        # print(f"config.prompt_length: {config.prompt_length}")
+        # print(f"config.response_length: {config.response_length}")
+        # print(f"max_model_len: {max_model_len}")
+        # print(f"max_num_batched_tokens:{max_num_batched_tokens}")
 
         if max_num_batched_tokens < max_model_len and self.config.enable_chunked_prefill:
-            print(f"config.response_length: {config.prompt_length}")
-            print(f"config.prompt_length: {config.response_length}")
-            print(f"max_model_len: {max_model_len}")
-            print(f"max_num_batched_tokens:{max_num_batched_tokens}")
-            raise ValueError('Enable chunked prefill, max_num_batched_tokens is smaller than max_model_len, \
-                             please increase max_num_batched_tokens or disable chunked prefill')
+            error_message = (
+                f"Chunked prefill enabled but max_num_batched_tokens ({max_num_batched_tokens}) is smaller than "
+                f"max_model_len ({max_model_len}). "
+                f"Prompt length: {config.prompt_length}, Response length: {config.response_length}. "
+                "Enable chunked prefill, max_num_batched_tokens is smaller than max_model_len"
+                "Please increase max_num_batched_tokens or disable chunked prefill."
+            )
+            raise ValueError(error_message)
+            # raise ValueError('Enable chunked prefill, max_num_batched_tokens is smaller than max_model_len, \
+            #                  please increase max_num_batched_tokens or disable chunked prefill')
 
         self.inference_engine = LLM(
             actor_module,
