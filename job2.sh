@@ -1,5 +1,5 @@
 
-python3 examples/data_preprocess/gsm8k.py --local_dir ~/data/gsm8k
+python3 examples/data_preprocess/math_dataset_refactored.py --local_dir ~/data/math
 
 python3 -c "import transformers; transformers.pipeline('text-generation', model='Qwen/Qwen2.5-7B-Instruct')"
 
@@ -30,5 +30,5 @@ PYTHONUNBUFFERED=1 python3 -m verl.trainer.main_ppo \
 			         trainer.nnodes=1 \
 			          trainer.save_freq=10 \
 			           trainer.test_freq=10 \
-				        trainer.total_epochs=15 2>&1 | tee verl_demo.log
+				        trainer.total_epochs=15 2>&1 | tee verl_demo_qwen.log
 
