@@ -1,7 +1,7 @@
 
 python3 examples/data_preprocess/gsm8k.py --local_dir ~/data/gsm8k
 
-# python3 -c "import transformers; transformers.pipeline('text-generation', model='Qwen/Qwen2.5-7B-Instruct')"
+python3 -c "import transformers; transformers.pipeline('text-generation', model='Qwen/Qwen2.5-7B-Instruct')"
 
 PYTHONUNBUFFERED=1 python3 -m verl.trainer.main_ppo \
 	 data.train_files=$HOME/data/math/train.parquet \
@@ -24,7 +24,7 @@ PYTHONUNBUFFERED=1 python3 -m verl.trainer.main_ppo \
 			  trainer.logger=['console'] \
 			   +trainer.val_before_train=False \
 			    trainer.default_hdfs_dir=null \
-			     trainer.n_gpus_per_node=2 \
+			     trainer.n_gpus_per_node=4 \
 			      trainer.nnodes=1 \
 			       trainer.save_freq=10 \
 			        trainer.test_freq=10 \
