@@ -74,7 +74,7 @@ class vLLMRollout(BaseRollout):
         tensor_parallel_size = self.config.get('tensor_model_parallel_size', 1)
         assert tensor_parallel_size <= torch.distributed.get_world_size(), \
             "tensor parallel size should be less than or equal to the world size"
-        max_num_batched_tokens = int(self.config.get('max_num_batched_tokens', 8192))
+        max_num_batched_tokens = int(self.config.get('max_num_batched_tokens', 16384))
 
         if kwargs.get('train_tp', None) is not None:
             # deployed with megatron
