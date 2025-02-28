@@ -22,6 +22,9 @@ def compute_score(solution_str, ground_truth) -> float:
             answer = remove_boxed(string_in_last_boxed)
             if is_equiv(answer, ground_truth):
                 retval = 1.
+        # Add extra reward for correct format: check for <think> and </think> tags
+        if "<think>" in solution_str and "</think>" in solution_str and "<answer>" in solution_str and "</answer>" in solution_str:
+            retval += 0.1
     except Exception as e:
         print(e)
 
