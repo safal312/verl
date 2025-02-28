@@ -269,19 +269,19 @@ class RayWorkerGroup(WorkerGroup):
                 if rank == 0:
                     register_center_actor = None
                     for _ in range(120):
-                        # actor_list = list_named_actors()
-                        # print(f"[DEBUG] Iteration {_}: Named actors: {actor_list}")
+                        actor_list = list_named_actors()
+                        print(f"[DEBUG] Iteration {_}: Named actors: {actor_list}")
                         if f"{self.name_prefix}_register_center" not in list_named_actors():
                             time.sleep(1)
                         else:
                             register_center_actor = ray.get_actor(f"{self.name_prefix}_register_center")
                             break
 
-                    # if register_center_actor is None:
-                        # print("[DEBUG] Failed to detect register_center_actor after waiting 120 seconds.")
+                    if register_center_actor is None:
+                        print("[DEBUG] Failed to detect register_center_actor after waiting 120 seconds.")
                         # Print environment variables for further debugging
-                        # print("[DEBUG] Environment variables:", dict(os.environ))
-                        # print("[DEBUG] Final list of named actors:", list_named_actors())
+                        print("[DEBUG] Environment variables:", dict(os.environ))
+                        print("[DEBUG] Final list of named actors:", list_named_actors())
 
                     assert register_center_actor is not None, f"failed to get register_center_actor: {self.name_prefix}_register_center in {list_named_actors(all_namespaces=True)}"
                     rank_zero_info = ray.get(register_center_actor.get_rank_zero_info.remote())
