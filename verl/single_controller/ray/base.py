@@ -268,7 +268,7 @@ class RayWorkerGroup(WorkerGroup):
 
                 if rank == 0:
                     register_center_actor = None
-                    for _ in range(120):
+                    for _ in range(180):
                         actor_list = list_named_actors()
                         print(f"[DEBUG] Iteration {_}: Named actors: {actor_list}")
                         if f"{self.name_prefix}_register_center" not in list_named_actors():

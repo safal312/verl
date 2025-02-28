@@ -95,11 +95,15 @@ class vLLMRollout(BaseRollout):
         max_model_len = int(max_model_len)
 
         print(f"config.prompt_length: {config.prompt_length}")
-        print(f"config.prompt_length: {config.response_length}")
+        print(f"config.response_length: {config.response_length}")
         print(f"max_model_len: {max_model_len}")
         print(f"max_num_batched_tokens:{max_num_batched_tokens}")
 
         if max_num_batched_tokens < max_model_len and self.config.enable_chunked_prefill:
+            print(f"config.response_length: {config.prompt_length}")
+            print(f"config.prompt_length: {config.response_length}")
+            print(f"max_model_len: {max_model_len}")
+            print(f"max_num_batched_tokens:{max_num_batched_tokens}")
             raise ValueError('Enable chunked prefill, max_num_batched_tokens is smaller than max_model_len, \
                              please increase max_num_batched_tokens or disable chunked prefill')
 
