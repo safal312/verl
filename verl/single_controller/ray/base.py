@@ -219,7 +219,9 @@ class RayWorkerGroup(WorkerGroup):
             strategy = "STRICT_PACK"
         pgs = resource_pool.get_placement_groups(strategy=strategy)
         world_size = resource_pool.world_size
-	self._world_size = world_size
+        self._world_size = world_size
+        print("###############")
+        print(world_size)
         # cia.add_kwarg("_world_size", world_size)
         num_gpus = 1 / resource_pool.max_collocate_count
 
